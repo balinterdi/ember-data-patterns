@@ -2,6 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    return this.store.findRecord('band', params.id);
+    return this.store.findRecord('band', params.id, {
+      reload: true,
+      include: 'songs'
+    });
   },
 });
