@@ -34,8 +34,8 @@ export default Controller.extend({
 
   isAddButtonDisabled: computed.empty('title'),
 
-  newSongPlaceholder: Ember.computed('model.name', function() {
-    let bandName = this.get('model.name');
+  newSongPlaceholder: Ember.computed('model.band.name', function() {
+    let bandName = this.get('model.band.name');
     return `New ${capitalize(bandName)} song`;
   }),
 
