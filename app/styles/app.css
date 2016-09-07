@@ -1,0 +1,154 @@
+.page-header a h1 {
+  color: #555;
+}
+
+.navbar-default .navbar-nav > li > a.active,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #555555;
+  background-color: #e7e7e7;
+}
+
+.songs .rating {
+  color: #aaa;
+  font-size: 1.1em;
+}
+
+.empty-list {
+  min-height: 100px;
+  text-align: center;
+}
+
+.empty-list .empty-message {
+  display: inline-block;
+  color: #555;
+  line-height: 100px;
+}
+
+.band-link .pointer {
+  float: right;
+  display: none;
+}
+
+.band-link.active .pointer {
+  display: block;
+}
+
+.new-band {
+  width: 82%;
+}
+
+.new-band-button {
+  float: right;
+  padding: 3px 10px;
+}
+
+.new-song {
+  width: 50%;
+}
+
+.new-song-button {
+  margin-left: 20px;
+}
+
+.rating-panel {
+  float: right;
+}
+
+.page-header a:hover {
+  text-decoration: none;
+}
+
+.band-info {
+  margin-top: 20px;
+}
+
+.nav-tabs > li > a.active,
+.nav-tabs > li > a.active:hover,
+.nav-tabs > li > a.active:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+.band-description-header {
+  margin-bottom: 20px;
+}
+
+.song-filter-search-panel {
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: block;
+}
+
+.song-filter-search-panel .active .sorting-button {
+  z-index: 2;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.sorting-link:hover {
+  text-decoration: none;
+}
+
+.song-filter-search-panel .sorting-link + .sorting-link {
+  margin-left: 5px;
+}
+
+.sorting-panel {
+  float: left;
+}
+
+@media (max-width: 690px) {
+  .sorting-panel {
+    margin-bottom: 5px;
+  }
+}
+
+.search-panel {
+  float: right;
+}
+
+.search-panel input {
+  padding: 4px 12px 6px 12px;
+}
+
+.search-panel .input-group-btn {
+  display: inline-block;
+}
+
+.search-panel .input-group-btn .search-button {
+  margin-left: -5px;
+}
+
+.loading-pane {
+  margin: 25px auto;
+}
+
+.loading-message {
+  text-align: center;
+  color: #aaa;
+}
+
+.error-pane {
+  margin: 25px auto;
+  background-color: rgba(255, 176, 176, 0.33);
+}
+
+.error-message {
+  text-align: center;
+  color: #e22626;
+  line-height: 100px;
+}
+
+.spinner {
+  background: url('/images/ajax-loader.gif') no-repeat;
+  height: 31px;
+  width: 31px;
+  margin: 0 auto;
+}

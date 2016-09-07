@@ -1,0 +1,18 @@
+<div class="panel panel-default band-panel">
+  <div class="panel-body">
+    <h4 class="panel-title band-description-header pull-left">Description</h4>
+    {{#if isEditing}}
+      <button class="btn btn-primary pull-right" {{action "save"}}>Save</button>
+    {{else}}
+      <button class="btn btn-primary pull-right" {{action "edit"}}>Edit</button>
+    {{/if}}
+    <div class="clearfix"></div>
+    {{#if isEditing}}
+      <div class="form-group">
+        {{textarea class="form-control" value=model.description}}
+      </div>
+    {{else}}
+      <p>{{model.description}}</p>
+    {{/if}}
+  </div>
+</div>
