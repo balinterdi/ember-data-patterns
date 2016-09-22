@@ -34,12 +34,11 @@ export default Controller.extend({
 
   isAddButtonDisabled: computed.empty('title'),
 
-  //FIXME:
-  // this.get('model.name') is sometimes still undefined (as the simpleBand
-  // relationship has not been loaded yet, the ajax request was still in flight)
   newSongPlaceholder: Ember.computed('model.name', function() {
     let bandName = this.get('model.name');
-    return `New ${capitalize(bandName)} song`;
+    if (bandName) {
+      return `New ${capitalize(bandName)} song`;
+    }
   }),
 
   actions: {

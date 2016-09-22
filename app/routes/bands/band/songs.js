@@ -13,11 +13,13 @@ export default Ember.Route.extend({
   actions: {
     //FIXME:
     // band.get('name') is sometimes still undefined (as the simpleBand
-    // relationship has not been loaded yet, the ajax request was still in flight)
+    // relationship has not been loaded yet, the ajax request is still in flight)
     didTransition() {
       let band = this.modelFor('bands.band');
-      let name = capitalizeWords(band.get('name'));
-      document.title = `${name} songs - Rock & Roll`;
+      let name = band.get('name');
+      if (name) {
+        document.title = `${capitalizeWords(name)} songs - Rock & Roll`;
+      }
     },
 
     createSong() {
