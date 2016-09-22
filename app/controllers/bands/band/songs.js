@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { capitalize } from '../../../helpers/capitalize';
 const { Controller, computed } = Ember;
 
 export default Controller.extend({
@@ -33,13 +32,6 @@ export default Controller.extend({
   canCreateSong: computed.or('songCreationStarted', 'hasSongs'),
 
   isAddButtonDisabled: computed.empty('title'),
-
-  newSongPlaceholder: Ember.computed('model.name', function() {
-    let bandName = this.get('model.name');
-    if (bandName) {
-      return `New ${capitalize(bandName)} song`;
-    }
-  }),
 
   actions: {
     enableSongCreation() {
