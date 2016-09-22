@@ -1,7 +1,11 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  name: DS.attr('string'),
-  description: DS.attr('string'),
-  songs: DS.hasMany('song'),
+  description:  DS.attr('string'),
+  songs:        DS.hasMany('song'),
+
+  simpleBand:   DS.belongsTo('simple-band'),
+
+  name: Ember.computed.alias('simpleBand.name'),
 });
