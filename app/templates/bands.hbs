@@ -8,7 +8,7 @@
       </form>
     </div>
     {{#each model as |band|}}
-      {{#link-to "bands.band" band class="list-group-item band-link"}}
+      {{#link-to "bands.band" band.id class="list-group-item band-link"}}
         {{capitalize band.name}}
         <span class="pointer glyphicon glyphicon-chevron-right"></span>
       {{/link-to}}
