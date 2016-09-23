@@ -59,6 +59,10 @@
   text-decoration: none;
 }
 
+.page-header a {
+  color: #555;
+}
+
 .band-info {
   margin-top: 20px;
 }

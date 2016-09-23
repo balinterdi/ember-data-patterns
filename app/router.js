@@ -13,6 +13,9 @@ Router.map(function() {
       this.route('details');
     });
   });
+
+  this.route('artists');
+  this.route('artist', { path: 'artists/:id' });
 });
 
 export default Router;
