@@ -10,28 +10,28 @@
     <li class="btn-group song-filter-search-panel" role="group">
       <div class="sorting-panel">
         {{#link-to (query-params sortBy="ratingDesc") class="sorting-link"}}
-          <button type="button" class="btn btn-default sort-rating-desc sorting-button">Rating
+          <button type="button" class="btn btn-default sort-rating-desc sorting-button" disabled={{isLoadingSongs}}>Rating
             <span class="glyphicon glyphicon-arrow-down"></span>
           </button>
         {{/link-to}}
         {{#link-to (query-params sortBy="ratingAsc") class="sorting-link"}}
-          <button type="button" class="btn btn-default sort-rating-asc sorting-button">Rating
+          <button type="button" class="btn btn-default sort-rating-asc sorting-button" disabled={{isLoadingSongs}}>Rating
             <span class="glyphicon glyphicon-arrow-up"></span>
           </button>
         {{/link-to}}
         {{#link-to (query-params sortBy="titleDesc") class="sorting-link"}}
-          <button type="button" class="btn btn-default sort-title-desc sorting-button">Title
+          <button type="button" class="btn btn-default sort-title-desc sorting-button" disabled={{isLoadingSongs}}>Title
             <span class="glyphicon glyphicon-arrow-down"></span>
           </button>
         {{/link-to}}
         {{#link-to (query-params sortBy="titleAsc") class="sorting-link"}}
-          <button type="button" class="btn btn-default sort-title-asc sorting-button">Title
+          <button type="button" class="btn btn-default sort-title-asc sorting-button" disabled={{isLoadingSongs}}>Title
             <span class="glyphicon glyphicon-arrow-up"></span>
           </button>
         {{/link-to}}
       </div>
       <div class="search-panel">
-        <input type="text" value={{searchInput}} class="search-field" oninput={{action (mut searchInput) value="target.value" }} />
+        <input type="text" value={{searchInput}} class="search-field" oninput={{action (mut searchInput) value="target.value" }} disabled={{isLoadingSongs}} />
         <div class="input-group-btn">
           <button class="btn btn-default search-button" {{action "searchSongs" searchTerm}}>
             <span class="glyphicon glyphicon-search" aria-label="search" aria-hidden="true"></span>
@@ -41,12 +41,21 @@
       <div class="clearfix"></div>
     </li>
   {{/unless}}
-  {{#each sortedSongs as |song|}}
-    <li class="list-group-item song">
-      {{capitalize song.title}}
-      {{star-rating item=song rating=song.rating on-click=(action "updateRating")}}
-    </li>
-  {{/each}}
+  {{#if isLoadingSongs}}
+    <div class="loading-pane">
+      <div class="loading-message">
+        Still loading your songs...
+        <div class="spinner"></div>
+      </div>
+    </div>
+  {{else}}
+    {{#each sortedSongs as |song|}}
+      <li class="list-group-item song">
+        {{capitalize song.title}}
+        {{star-rating item=song rating=song.rating on-click=(action "updateRating")}}
+      </li>
+    {{/each}}
+  {{/if}}
   {{#if noMatchingSongs}}
     <li class="list-group-item empty-list">
       <div class="empty-message">

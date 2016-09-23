@@ -22,6 +22,8 @@ export default Ember.Route.extend({
     let band = this.modelFor('bands.band');
     controller.set('band', band);
     controller.updateSearchInput();
+
+    controller.set('isLoadingSongs', false);
   },
 
   resetController(controller) {
@@ -34,6 +36,13 @@ export default Ember.Route.extend({
   },
 
   actions: {
+    loading() {
+      let controller = this.controller;
+      if (controller) {
+        controller.set('isLoadingSongs', true);
+      }
+    },
+
     didTransition() {
       let band = this.modelFor('bands.band');
       let name = capitalizeWords(band.get('name'));

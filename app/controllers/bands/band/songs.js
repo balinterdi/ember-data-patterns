@@ -22,13 +22,17 @@ export default Controller.extend({
   searchInput: '',
   searchTerm: '',
 
+  isLoadingSongs: false,
+
+  notLoadingSongs:          computed.not('isLoadingSongs'),
   noSongs:                  computed.equal('model.length', 0),
   searchTermEmpty:          computed.empty('searchTerm'),
   songCreationNotStarted:   computed.not('songCreationStarted'),
   promptToCreateFirstSong:  computed.and('noSongs', 'searchTermEmpty', 'songCreationNotStarted'),
-  noMatchingSongs:          computed.and('noSongs', 'searchTerm'),
+  noMatchingSongs:          computed.and('noSongs', 'searchTerm', 'notLoadingSongs'),
 
-  isAddButtonDisabled: computed.empty('title'),
+  emptyTitle:               computed.empty('title'),
+  isAddButtonDisabled:      computed.or('emptyTitle', 'isLoadingSongs'),
 
   updateSearchInput() {
     this.set('searchInput', this.get('searchTerm'));
