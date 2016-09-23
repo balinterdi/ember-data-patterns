@@ -1,8 +1,8 @@
 <ul class="list-group songs">
-  {{#if canCreateSong}}
+  {{#unless promptToCreateFirstSong}}
     <li class="list-group-item">
       <form class="new-song-form" {{action "createSong" on="submit"}}>
-        {{input type="text" class="new-song" placeholder=newSongPlaceholder value=title}}
+        {{input type="text" class="new-song" placeholder=(concat "New " (capitalize band.name) " song") value=title}}
         <button type="submit" class="btn btn-primary btn-sm new-song-button"
                 disabled={{isAddButtonDisabled}}>Add</button>
       </form>
@@ -31,27 +31,34 @@
         {{/link-to}}
       </div>
       <div class="search-panel">
-        {{input type="text" placeholder="Start typing" value=searchTerm class="search-field"}}
+        <input type="text" value={{searchInput}} class="search-field" oninput={{action (mut searchInput) value="target.value" }} />
         <div class="input-group-btn">
-          <button class="btn btn-default search-button">
+          <button class="btn btn-default search-button" {{action "searchSongs" searchTerm}}>
             <span class="glyphicon glyphicon-search" aria-label="search" aria-hidden="true"></span>
           </button>
         </div>
       </div>
       <div class="clearfix"></div>
     </li>
-  {{/if}}
+  {{/unless}}
   {{#each sortedSongs as |song|}}
     <li class="list-group-item song">
       {{capitalize song.title}}
       {{star-rating item=song rating=song.rating on-click=(action "updateRating")}}
     </li>
   {{/each}}
-  {{#unless canCreateSong}}
+  {{#if noMatchingSongs}}
+    <li class="list-group-item empty-list">
+      <div class="empty-message">
+        No songs match your search.
+      </div>
+    </li>
+  {{/if}}
+  {{#if promptToCreateFirstSong}}
     <li class="list-group-item empty-list">
       <div class="empty-message">
         There are no songs yet. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
       </div>
     </li>
-  {{/unless}}
+  {{/if}}
 </ul>

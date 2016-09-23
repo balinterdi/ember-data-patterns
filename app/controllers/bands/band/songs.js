@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import { capitalize } from '../../../helpers/capitalize';
 const { Controller, computed } = Ember;
 
 export default Controller.extend({
   queryParams: {
     sortBy: 'sort',
-    searchTerm: 's',
+    searchTerm: 'q',
   },
   songCreationStarted: false,
   sortBy: 'ratingDesc',
@@ -18,28 +17,28 @@ export default Controller.extend({
     };
     return options[this.get('sortBy')].split(',');
   }),
-  sortedSongs: Ember.computed.sort('matchingSongs', 'sortProperties'),
+  sortedSongs: Ember.computed.sort('model', 'sortProperties'),
 
+  searchInput: '',
   searchTerm: '',
 
-  matchingSongs: Ember.computed('model.songs.@each.title', 'searchTerm', function() {
-    return this.get('model.songs').filter((song) => {
-      let searchTerm = this.get('searchTerm').toLowerCase();
-      return song.get('title').toLowerCase().indexOf(searchTerm) !== -1;
-    });
-  }),
-
-  hasSongs: computed.bool('model.songs.length'),
-  canCreateSong: computed.or('songCreationStarted', 'hasSongs'),
+  noSongs:                  computed.equal('model.length', 0),
+  searchTermEmpty:          computed.empty('searchTerm'),
+  songCreationNotStarted:   computed.not('songCreationStarted'),
+  promptToCreateFirstSong:  computed.and('noSongs', 'searchTermEmpty', 'songCreationNotStarted'),
+  noMatchingSongs:          computed.and('noSongs', 'searchTerm'),
 
   isAddButtonDisabled: computed.empty('title'),
 
-  newSongPlaceholder: Ember.computed('model.name', function() {
-    let bandName = this.get('model.name');
-    return `New ${capitalize(bandName)} song`;
-  }),
+  updateSearchInput() {
+    this.set('searchInput', this.get('searchTerm'));
+  },
 
   actions: {
+    searchSongs() {
+      this.set('searchTerm', this.get('searchInput'));
+    },
+
     enableSongCreation() {
       this.set('songCreationStarted', true);
     },

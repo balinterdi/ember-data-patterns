@@ -2,12 +2,35 @@ import Ember from 'ember';
 import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 
 export default Ember.Route.extend({
-  model() {
-    return this.modelFor('bands.band');
+  queryParams: {
+    searchTerm: {
+      refreshModel: true
+    }
+  },
+
+  model({ searchTerm }) {
+    let band = this.modelFor('bands.band');
+    if (searchTerm) {
+      return this.store.query('song', { bandId: band.id, q: searchTerm });
+    } else {
+      return band.get('songs');
+    }
+  },
+
+  setupController(controller) {
+    this._super(...arguments);
+    let band = this.modelFor('bands.band');
+    controller.set('band', band);
+    controller.updateSearchInput();
   },
 
   resetController(controller) {
-    controller.set('songCreationStarted', false);
+    controller.setProperties({
+      songCreationStarted: false,
+      searchTerm: ''
+    });
+
+    controller.updateSearchInput();
   },
 
   actions: {
