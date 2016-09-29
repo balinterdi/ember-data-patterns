@@ -174,3 +174,10 @@
   width: 31px;
   margin: 0 auto;
 }
+
+.artist-card {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #eee;
+  border-radius: 3px;
+}

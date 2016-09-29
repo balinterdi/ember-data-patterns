@@ -1,4 +1,13 @@
-<div class="col-md-4">
-  <h3>{{model.firstName}} {{model.lastName}}</h3>
+<div class="panel-default">
+  <div class="panel-body">
+    <div class="artist-column col-md-4">
+      <img height="400" width="400" src={{model.imageUrl}} alt={{model.name}} title={{model.name}} border="0" />
+    </div>
+    <div class="artist-card col-md-5 col-md-offset-1">
+      <h4>{{model.name}}</h4>
+      <div class="artist-props">
+        <p><strong>Age: </strong>{{model.age}}</p>
+      </div>
+    </div>
+  </div>
 </div>
-
