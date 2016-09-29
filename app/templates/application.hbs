@@ -1,11 +1,12 @@
 <div class="container">
-  <div class="page-header clearfix">
-    {{#link-to 'index' class="pull-left"}}
+  <div class="page-header">
+    {{#link-to 'index'}}
       <h1>Rock & Roll<small> with Ember.js</small></h1>
     {{/link-to}}
-    {{#link-to 'artists' class="pull-right"}}
-      <h4>Artists</h4>
-    {{/link-to}}
+    <ul class="site-links nav nav-pills">
+      <li class="site-link">{{link-to 'Bands' 'bands'}}</li>
+      <li class="site-link">{{link-to 'Artists' 'artists'}}</li>
+    </ul>
   </div>
   <div class="row">
     {{outlet}}

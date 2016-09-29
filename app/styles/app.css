@@ -1,5 +1,23 @@
+.page-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-header a {
+  flex: 1;
+}
+
 .page-header a h1 {
   color: #555;
+}
+
+.page-header .site-links {
+  flex: none;
+  align-self: flex-end;
+}
+
+.page-header .site-link {
+  font-size: 1.1em;
 }
 
 .navbar-default .navbar-nav > li > a.active,
