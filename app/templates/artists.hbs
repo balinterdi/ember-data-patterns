@@ -5,5 +5,13 @@
         {{artist.firstName}} {{artist.lastName}}
       {{/link-to}}
     {{/each}}
+    {{#if isLoadingArtists}}
+      <div class="loading-pane list-group-item">
+        <div class="loading-message">
+          Loading data
+          <div class="spinner"></div>
+        </div>
+      </div>
+    {{/if}}
   </div>
 </div>
