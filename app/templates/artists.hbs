@@ -1,11 +1,11 @@
 <div class="col-md-4">
   <div class="list-group">
-    {{#each model as |artist|}}
+    {{#each artists as |artist|}}
       {{#link-to "artist" artist.id class="list-group-item"}}
         {{artist.firstName}} {{artist.lastName}}
       {{/link-to}}
     {{/each}}
-    {{#if isLoadingArtists}}
+    {{#if isFetchingMore}}
       <div class="loading-pane list-group-item">
         <div class="loading-message">
           Loading data
