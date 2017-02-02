@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
+import { task } from 'ember-concurrency';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -10,18 +11,23 @@ export default Ember.Route.extend({
 
   model({ searchTerm }) {
     let band = this.modelFor('bands.band');
-    if (searchTerm) {
-      return this.store.query('song', { bandId: band.id, q: searchTerm });
-    } else {
-      return band.get('songs');
-    }
+    return {
+      search: this.get('searchSongsTask').perform(band, searchTerm)
+    };
   },
+
+  searchSongsTask: task(function * (band, searchTerm) {
+    if (searchTerm) {
+      return yield this.store.query('song', { bandId: band.id, q: searchTerm });
+    } else {
+      return yield band.get('songs');
+    }
+  }),
 
   setupController(controller) {
     this._super(...arguments);
     let band = this.modelFor('bands.band');
     controller.set('band', band);
-    controller.set('isLoadingSongs', false);
   },
 
   resetController(controller) {
@@ -32,13 +38,6 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    loading() {
-      let controller = this.controller;
-      if (controller) {
-        controller.set('isLoadingSongs', true);
-      }
-    },
-
     searchSongs() {
       this.refresh();
     },

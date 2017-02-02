@@ -16,14 +16,15 @@ export default Controller.extend({
     };
     return options[this.get('sortBy')].split(',');
   }),
-  sortedSongs: Ember.computed.sort('model', 'sortProperties'),
+  sortedSongs: Ember.computed.sort('songs', 'sortProperties'),
 
   searchTerm: '',
 
-  isLoadingSongs: false,
+  isLoadingSongs:           computed.readOnly('model.search.isRunning'),
+  songs:                    computed.readOnly('model.search.value'),
 
   notLoadingSongs:          computed.not('isLoadingSongs'),
-  noSongs:                  computed.equal('model.length', 0),
+  noSongs:                  computed.equal('songs.length', 0),
   searchTermEmpty:          computed.empty('searchTerm'),
   songCreationNotStarted:   computed.not('songCreationStarted'),
   promptToCreateFirstSong:  computed.and('noSongs', 'searchTermEmpty', 'songCreationNotStarted'),
