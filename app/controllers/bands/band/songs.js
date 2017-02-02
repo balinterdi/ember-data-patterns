@@ -4,7 +4,6 @@ const { Controller, computed } = Ember;
 export default Controller.extend({
   queryParams: {
     sortBy: 'sort',
-    searchTerm: 'q',
   },
   songCreationStarted: false,
   sortBy: 'ratingDesc',

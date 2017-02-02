@@ -4,6 +4,7 @@ import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 export default Ember.Route.extend({
   queryParams: {
     searchTerm: {
+      as: 'q',
       refreshModel: true
     }
   },
@@ -11,7 +12,10 @@ export default Ember.Route.extend({
   model({ searchTerm }) {
     let band = this.modelFor('bands.band');
     if (searchTerm) {
-      return this.store.query('song', { bandId: band.id, q: searchTerm });
+      return this.store.query('song', {
+        bandId: band.id,
+        q: searchTerm
+      });
     } else {
       return band.get('songs');
     }
