@@ -4,7 +4,6 @@ const { Controller, computed } = Ember;
 export default Controller.extend({
   queryParams: {
     sortBy: 'sort',
-    searchTerm: 'q',
   },
   songCreationStarted: false,
   sortBy: 'ratingDesc',
@@ -19,7 +18,6 @@ export default Controller.extend({
   }),
   sortedSongs: Ember.computed.sort('model', 'sortProperties'),
 
-  searchInput: '',
   searchTerm: '',
 
   isLoadingSongs: false,
@@ -34,15 +32,7 @@ export default Controller.extend({
   emptyTitle:               computed.empty('title'),
   isAddButtonDisabled:      computed.or('emptyTitle', 'isLoadingSongs'),
 
-  updateSearchInput() {
-    this.set('searchInput', this.get('searchTerm'));
-  },
-
   actions: {
-    searchSongs() {
-      this.set('searchTerm', this.get('searchInput'));
-    },
-
     enableSongCreation() {
       this.set('songCreationStarted', true);
     },

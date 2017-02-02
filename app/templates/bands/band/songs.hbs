@@ -31,7 +31,7 @@
         {{/link-to}}
       </div>
       <div class="search-panel">
-        <input type="text" value={{searchInput}} class="search-field" oninput={{action (mut searchInput) value="target.value" }} disabled={{isLoadingSongs}} />
+        <input type="text" value={{searchTerm}} class="search-field" oninput={{action (mut searchTerm) value="target.value" }} disabled={{isLoadingSongs}} />
         <div class="input-group-btn">
           <button class="btn btn-default search-button" {{action "searchSongs" searchTerm}}>
             <span class="glyphicon glyphicon-search" aria-label="search" aria-hidden="true"></span>

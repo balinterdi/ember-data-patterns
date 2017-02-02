@@ -4,7 +4,7 @@ import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 export default Ember.Route.extend({
   queryParams: {
     searchTerm: {
-      refreshModel: true
+      as: 'q'
     }
   },
 
@@ -21,8 +21,6 @@ export default Ember.Route.extend({
     this._super(...arguments);
     let band = this.modelFor('bands.band');
     controller.set('band', band);
-    controller.updateSearchInput();
-
     controller.set('isLoadingSongs', false);
   },
 
@@ -31,8 +29,6 @@ export default Ember.Route.extend({
       songCreationStarted: false,
       searchTerm: ''
     });
-
-    controller.updateSearchInput();
   },
 
   actions: {
@@ -41,6 +37,10 @@ export default Ember.Route.extend({
       if (controller) {
         controller.set('isLoadingSongs', true);
       }
+    },
+
+    searchSongs() {
+      this.refresh();
     },
 
     didTransition() {
