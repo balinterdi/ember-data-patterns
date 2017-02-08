@@ -3,7 +3,15 @@ import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 
 export default Ember.Route.extend({
   model() {
-    return this.modelFor('bands.band');
+    let band = this.modelFor('bands.band');
+    let songs = band.hasMany('songs');
+    if (songs.value()) {
+      return band;
+    }
+    return songs.load()
+      .then(() => {
+        return band;
+      });
   },
 
   resetController(controller) {
