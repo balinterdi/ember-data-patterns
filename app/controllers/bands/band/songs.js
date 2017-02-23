@@ -2,21 +2,9 @@ import Ember from 'ember';
 const { Controller, computed } = Ember;
 
 export default Controller.extend({
-  queryParams: {
-    sortBy: 'sort',
-  },
   songCreationStarted: false,
-  sortBy: 'ratingDesc',
-  sortProperties: computed('sortBy', function() {
-    let options = {
-      'ratingDesc': 'rating:desc,title:asc',
-      'ratingAsc': 'rating:asc,title:asc',
-      'titleDesc': 'title:desc',
-      'titleAsc': 'title:asc',
-    };
-    return options[this.get('sortBy')].split(',');
-  }),
-  sortedSongs: Ember.computed.sort('model', 'sortProperties'),
+
+  sortBy: '-rating,title',
 
   searchInput: '',
   searchTerm: '',

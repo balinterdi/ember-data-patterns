@@ -9,22 +9,22 @@
     </li>
     <li class="btn-group song-filter-search-panel" role="group">
       <div class="sorting-panel">
-        {{#link-to (query-params sortBy="ratingDesc") class="sorting-link"}}
+        {{#link-to (query-params sortBy="-rating,title") class="sorting-link"}}
           <button type="button" class="btn btn-default sort-rating-desc sorting-button">Rating
             <span class="glyphicon glyphicon-arrow-down"></span>
           </button>
         {{/link-to}}
-        {{#link-to (query-params sortBy="ratingAsc") class="sorting-link"}}
+        {{#link-to (query-params sortBy="rating,title") class="sorting-link"}}
           <button type="button" class="btn btn-default sort-rating-asc sorting-button">Rating
             <span class="glyphicon glyphicon-arrow-up"></span>
           </button>
         {{/link-to}}
-        {{#link-to (query-params sortBy="titleDesc") class="sorting-link"}}
+        {{#link-to (query-params sortBy="-title") class="sorting-link"}}
           <button type="button" class="btn btn-default sort-title-desc sorting-button">Title
             <span class="glyphicon glyphicon-arrow-down"></span>
           </button>
         {{/link-to}}
-        {{#link-to (query-params sortBy="titleAsc") class="sorting-link"}}
+        {{#link-to (query-params sortBy="title") class="sorting-link"}}
           <button type="button" class="btn btn-default sort-title-asc sorting-button">Title
             <span class="glyphicon glyphicon-arrow-up"></span>
           </button>
@@ -41,7 +41,7 @@
       <div class="clearfix"></div>
     </li>
   {{/unless}}
-  {{#each sortedSongs as |song|}}
+  {{#each model as |song|}}
     <li class="list-group-item song">
       {{capitalize song.title}}
       {{star-rating item=song rating=song.rating on-click=(action "updateRating")}}

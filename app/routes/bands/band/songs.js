@@ -3,22 +3,23 @@ import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 
 export default Ember.Route.extend({
   queryParams: {
+    sortBy: {
+      as: 'sort',
+      refreshModel: true
+    },
     searchTerm: {
       as: 'q',
       refreshModel: true
     }
   },
 
-  model({ searchTerm }) {
+  model({ searchTerm, sortBy }) {
     let band = this.modelFor('bands.band');
-    if (searchTerm) {
-      return this.store.query('song', {
-        bandId: band.id,
-        q: searchTerm
-      });
-    } else {
-      return band.get('songs');
-    }
+    return this.store.query('song', {
+      bandId: band.id,
+      sort: sortBy,
+      q: searchTerm
+    });
   },
 
   setupController(controller) {
