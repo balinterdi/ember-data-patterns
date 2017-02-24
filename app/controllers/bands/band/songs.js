@@ -9,6 +9,8 @@ export default Controller.extend({
   searchInput: '',
   searchTerm: '',
 
+  pageNumber: 1,
+
   noSongs:                  computed.equal('model.length', 0),
   searchTermEmpty:          computed.empty('searchTerm'),
   songCreationNotStarted:   computed.not('songCreationStarted'),

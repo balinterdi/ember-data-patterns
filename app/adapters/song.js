@@ -2,13 +2,15 @@ import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
   urlForQuery(params) {
-    let { q, sort, bandId } = params;
-    delete params.q;
+    let { searchTerm, sort, pageNumber, pageSize=10, bandId } = params;
+    delete params.searchTerm;
     delete params.sort;
+    delete params.pageNumber;
+    delete params.pageSize;
     delete params.bandId;
-    let urlParams = 'sort=' + sort;
-    if (q) {
-      urlParams += '&filter[title]=' + q;
+    let urlParams = `sort=${sort}&page[number]=${pageNumber}&page[size]=${pageSize}`;
+    if (searchTerm) {
+      urlParams += '&filter[title]=' + searchTerm;
     }
     return `${this.buildURL('bands', bandId)}/songs?${urlParams}`;
   }

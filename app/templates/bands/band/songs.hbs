@@ -30,6 +30,18 @@
           </button>
         {{/link-to}}
       </div>
+      <div class="pagination-links">
+        {{#if model.links.prev}}
+          <a href={{model.links.prev}} type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </a>
+        {{/if}}
+        {{#if model.links.next}}
+          <a href={{model.links.next}} type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </a>
+        {{/if}}
+      </div>
       <div class="search-panel">
         <input type="text" value={{searchInput}} class="search-field" oninput={{action (mut searchInput) value="target.value" }} />
         <div class="input-group-btn">

@@ -8,18 +8,23 @@ export default Ember.Route.extend({
       refreshModel: true
     },
     searchTerm: {
-      as: 'q',
+      as: 'filter[title]',
       refreshModel: true
+    },
+    pageNumber: {
+      as: 'page[number]'
     }
   },
 
-  model({ searchTerm, sortBy }) {
+  model({ searchTerm, sortBy, pageNumber } ) {
     let band = this.modelFor('bands.band');
-    return this.store.query('song', {
+    let paramsForQuery = {
+      pageNumber,
+      searchTerm,
       bandId: band.id,
       sort: sortBy,
-      q: searchTerm
-    });
+    };
+    return this.store.query('song', paramsForQuery);
   },
 
   setupController(controller) {
