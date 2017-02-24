@@ -12,7 +12,8 @@ export default Ember.Route.extend({
       refreshModel: true
     },
     pageNumber: {
-      as: 'page[number]'
+      as: 'page[number]',
+      refreshModel: true
     }
   },
 

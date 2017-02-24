@@ -10,6 +10,7 @@ export default Controller.extend({
   searchTerm: '',
 
   pageNumber: 1,
+  pageSize: 10,
 
   noSongs:                  computed.equal('model.length', 0),
   searchTermEmpty:          computed.empty('searchTerm'),
@@ -22,6 +23,11 @@ export default Controller.extend({
   updateSearchInput() {
     this.set('searchInput', this.get('searchTerm'));
   },
+
+  hasPrevPage: Ember.computed.gt('pageNumber', 1),
+  hasNextPage: Ember.computed('pageNumber', 'model.meta.page-count', function() {
+    return this.get('pageNumber') < this.get('model.meta.page-count');
+  }),
 
   actions: {
     searchSongs() {

@@ -31,15 +31,15 @@
         {{/link-to}}
       </div>
       <div class="pagination-links">
-        {{#if model.links.prev}}
-          <a href={{model.links.prev}} type="button" class="btn btn-default">
+        {{#if hasPrevPage}}
+          {{#link-to (query-params pageNumber=(dec pageNumber)) class="btn btn-default"}}
             <span class="glyphicon glyphicon-arrow-left"></span>
-          </a>
+          {{/link-to}}
         {{/if}}
-        {{#if model.links.next}}
-          <a href={{model.links.next}} type="button" class="btn btn-default">
+        {{#if hasNextPage}}
+          {{#link-to (query-params pageNumber=(inc pageNumber)) class="btn btn-default"}}
             <span class="glyphicon glyphicon-arrow-right"></span>
-          </a>
+          {{/link-to}}
         {{/if}}
       </div>
       <div class="search-panel">
